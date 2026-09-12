@@ -1,0 +1,35 @@
+---------------------------------------
+
+---------------------------------------
+Todo ello utilizando un stack tecnológico moderno:
+
+- Java 21
+- Spring Boot
+- PostgreSQL como base de datos
+- Docker y Docker Compose para la contenerización y orquestación
+- Spring Tool Suite (STS) como entorno de desarrollo
+
+---------------------------------------
+-- Compilar
+mvn clean install -DskipTests
+
+--Ejecutar
+mvn spring-boot:run -pl application
+---------------------------------------
+comprobar si e puerto esta ejecutando algo 
+> netstat -ano | findstr 5432
+
+---------------------------------------
+Docker comandos
+
+- docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"
+
+
+---------------------------------------
+
+
+
+---------------------------------------
+
+
+---------------------------------------
