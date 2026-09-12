@@ -13,5 +13,7 @@ public interface CursoService {
 
 	Curso guardarCurso(Curso curso);
 
+	Curso actualizarCurso(Long id, Curso cursoDetalles);
+
 	void eliminarCurso(Long id);
 }

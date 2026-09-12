@@ -39,6 +39,17 @@ public class CursoServiceImpl implements CursoService {
 	}
 
 	@Override
+	public Curso actualizarCurso(Long id, Curso cursoDetalles) {
+		Curso cursoExistente = cursoRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Curso no encontrado con id: " + id));
+
+		cursoExistente.setTitulo(cursoDetalles.getTitulo());
+		cursoExistente.setDescripcion(cursoDetalles.getDescripcion());
+
+		return cursoRepository.save(cursoExistente);
+	}
+
+	@Override
 	@Transactional
 	public void eliminarCurso(Long id) {
 		cursoRepository.deleteById(id);
