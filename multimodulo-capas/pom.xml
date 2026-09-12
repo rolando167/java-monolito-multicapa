@@ -37,6 +37,7 @@
 		<module>application</module>
 		<module>dto</module>
 		<module>mapper</module>
+		<module>domain-usuarios</module>
 	</modules>
 
 </project>

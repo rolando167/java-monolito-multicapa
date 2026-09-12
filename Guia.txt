@@ -15,6 +15,10 @@ mvn clean install -DskipTests
 
 --Ejecutar
 mvn spring-boot:run -pl application
+
+-- Ejcutar modular por dominio 
+>mvn clean install -pl domain-usuarios && mvn spring-boot:run -pl application
+
 ---------------------------------------
 comprobar si e puerto esta ejecutando algo 
 > netstat -ano | findstr 5432

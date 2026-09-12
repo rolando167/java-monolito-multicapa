@@ -1,0 +1,4 @@
+.sonarlint
+.metadata
+
+target/
