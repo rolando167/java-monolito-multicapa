@@ -40,7 +40,8 @@ public class CursoController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Curso> buscarPorId(@PathVariable Long id) {
-		return cursoService.buscarPorId(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+		Curso curso = cursoService.buscarPorId(id);
+		return ResponseEntity.ok(curso);
 	}
 
 	@PutMapping("/{id}")
@@ -51,10 +52,7 @@ public class CursoController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-		if (cursoService.buscarPorId(id).isPresent()) {
-			cursoService.eliminarCurso(id);
-			return ResponseEntity.noContent().build();
-		}
-		return ResponseEntity.notFound().build();
+		cursoService.eliminarCurso(id); // ¡Aquí llamas al servicio!
+		return ResponseEntity.noContent().build(); // Devuelve 204 No Content
 	}
 }

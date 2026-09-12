@@ -9,7 +9,7 @@ public interface CursoService {
 
 	List<Curso> listarCursos();
 
-	Optional<Curso> buscarPorId(Long id);
+	Curso buscarPorId(Long id);
 
 	Curso guardarCurso(Curso curso);
 
