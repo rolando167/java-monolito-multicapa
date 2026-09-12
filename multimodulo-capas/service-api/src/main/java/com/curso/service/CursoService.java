@@ -1,15 +1,15 @@
 package com.curso.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import com.curso.dto.CursoResponseDto;
 import com.curso.model.entity.Curso;
 
 public interface CursoService {
 
-	List<Curso> listarCursos();
+	List<CursoResponseDto> listarCursos();
 
-	Curso buscarPorId(Long id);
+	CursoResponseDto buscarPorId(Long id);
 
 	Curso guardarCurso(Curso curso);
 

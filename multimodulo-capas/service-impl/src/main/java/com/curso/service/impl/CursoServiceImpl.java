@@ -1,10 +1,13 @@
 package com.curso.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.curso.dto.CursoResponseDto;
+import com.curso.mapper.CursoMapper;
 import com.curso.model.entity.Curso;
 import com.curso.repository.CursoRepository;
 import com.curso.service.CursoService;
@@ -13,23 +16,27 @@ import com.curso.service.CursoService;
 public class CursoServiceImpl implements CursoService {
 
 	private final CursoRepository cursoRepository;
+	private final CursoMapper cursoMapper;
 
 	// Inyección por constructor (Spring detecta automáticamente el repositorio)
-	public CursoServiceImpl(CursoRepository cursoRepository) {
+	public CursoServiceImpl(CursoRepository cursoRepository, CursoMapper cursoMapper) {
 		this.cursoRepository = cursoRepository;
+		this.cursoMapper = cursoMapper;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Curso> listarCursos() {
-		return cursoRepository.findAll();
+	public List<CursoResponseDto> listarCursos() {
+		return cursoRepository.findAll().stream().map(cursoMapper::toDto) // <-- ¡Aquí entra la magia de MapStruct!
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Curso buscarPorId(Long id) {
-		return cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
-		// O una excepción personalizada que luego mapees a 404
+	public CursoResponseDto buscarPorId(Long id) {
+		Curso curso = cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
+
+		return cursoMapper.toDto(curso); // <-- De entidad a ResponseDto en una sola línea
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.curso.dto.CursoResponseDto;
 import com.curso.model.entity.Curso;
 import com.curso.service.CursoService;
 
@@ -27,8 +28,8 @@ public class CursoController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Curso>> listar() {
-		List<Curso> cursos = cursoService.listarCursos();
+	public ResponseEntity<List<CursoResponseDto>> listar() {
+		List<CursoResponseDto> cursos = cursoService.listarCursos();
 		return ResponseEntity.ok(cursos); // Devuelve 200 OK con la lista
 	}
 
@@ -39,8 +40,8 @@ public class CursoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Curso> buscarPorId(@PathVariable Long id) {
-		Curso curso = cursoService.buscarPorId(id);
+	public ResponseEntity<CursoResponseDto> buscarPorId(@PathVariable Long id) {
+		CursoResponseDto curso = cursoService.buscarPorId(id);
 		return ResponseEntity.ok(curso);
 	}
 

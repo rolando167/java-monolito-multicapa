@@ -35,6 +35,8 @@
 		<module>service-api</module>
 		<module>service-impl</module>
 		<module>application</module>
+		<module>dto</module>
+		<module>mapper</module>
 	</modules>
 
 </project>

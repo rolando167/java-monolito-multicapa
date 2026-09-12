@@ -17,6 +17,12 @@
 			<version>${project.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.curso</groupId>
+			<artifactId>dto</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- Starter web para levantar la aplicación como una API REST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
