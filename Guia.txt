@@ -27,9 +27,68 @@ Docker comandos
 
 ---------------------------------------
 
+1. El Monolito Tradicional (Monolito Clásico o "Big Ball of Mud")
+Es el típico proyecto donde todo vive en un solo módulo y un solo empaquetado (jar o war).
 
+Cómo se organiza: Todo está mezclado en paquetes dentro del mismo proyecto (controller, service, repository, model juntos).
+
+Problema: A medida que la aplicación crece, las capas se acoplan demasiado. Es fácil que un controlador llame directamente a cualquier cosa, creando el famoso código espagueti.
+
+Cuándo se usa: Para proyectos pequeños, MVPs (productos mínimos viables) o prototipos rápidos.
+
+--------------------------------------------------
+
+2. El Monolito Multimódulo por Capas (El que acabamos de construir)
+Aquí ya rompemos el monolito físico en varios proyectos Maven, pero la división se hace por capas técnicas (horizontal).
+
+Cómo se organiza: Separamos por responsabilidades técnicas en módulos independientes: model, repository, service-api, service-impl, application.
+
+Ventaja: Maven te obliga a respetar las reglas (por ejemplo, el módulo model no puede ver a los servicios, lo cual evita dependencias circulares feas).
+
+Cuándo se usa: Cuando quieres orden técnico estricto y reutilizar componentes sin la complejidad de los microservicios.
+
+El problema: Si el día de mañana quieres eliminar o modificar la funcionalidad de "Cursos", tienes que tocar piezas esparcidas por todo el proyecto (el módulo de repositorios, el de DTOs, el de controladores, etc.).
+
+----------------------------------------------
+3. El Monolito Modular basado en Dominio (Modular Monolith / Domain-Centric)
+Este es el estándar moderno más avanzado y el paso previo ideal antes de pensar en microservicios. Aquí no se divide por capas técnicas, sino por dominios de negocio (vertical).
+
+Cómo se organiza: En lugar de tener un módulo de "servicios" para todo, tienes módulos (o paquetes estrictos) por Bounded Contexts (Contextos Delimitados) del negocio. Por ejemplo:
+
+Módulo cursos (tiene sus propios controladores, servicios, repositorios y modelos de cursos).
+
+Módulo usuarios (tiene sus propios controladores, servicios, repositorios y modelos de usuarios).
+
+Herramientas: Se apoya en herramientas como Spring Modulith para verificar que el módulo de usuarios no toque por debajo las bases de datos o clases internas del módulo de cursos sin permiso.
+
+Ventaja: Si el día de mañana el negocio crece tanto que necesitas separar "cursos" en un microservicio independiente, como ya está encapsulado en su propio módulo, sacarlo a otro servidor es sumamente fácil.
+
+Ventaja: Y si el día de mañana añades otra parte, por ejemplo, usuarios, tendrá su propio paquete autónomo con su entidad Usuario, su repositorio, etc.
+
+------------------------------------------------
+Resumen visual:
+Tradicional: Todo mezclado en una olla.
+
+Multimódulo por capas (lo que hiciste): Separado por ingredientes/herramientas (todos los modelos juntos, todos los repos juntos).
+
+Modular por dominio: Separado por platos terminados (el módulo de cursos por un lado, el de pagos por otro).
 
 ---------------------------------------
+¿Cómo se vería esto en un Monolito Modular por Dominio?
 
-
+mi-proyecto/
+│
+├── modulo-cursos/
+│   ├── controller/
+│   ├── service/
+│   ├── repository/
+│   └── model/
+│
+├── modulo-usuarios/
+│   ├── controller/
+│   ├── service/
+│   ├── repository/
+│   └── model/
+│
+└── application/ (orquestador general)
 ---------------------------------------
