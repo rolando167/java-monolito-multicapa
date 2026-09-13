@@ -47,7 +47,7 @@ spring.jpa.properties.hibernate.format_sql=true
 - Políticas de rotación de logs (diario)
 - Chaos money (delay) - Ingenieria del caos 
 - Jmeter 99% (Prueba de rendimiento) - percentil 95
-- Trace ID (ID de Rastreo) HTTP
+- Trace ID (ID de Rastreo) HTTP - MDC
 - MDC estructurado" (Structured Logging) JSON LOGS
 - PITest - Pruebas Unitarias - se genera un reporte index
 - Colores windows terminal (adicional)
