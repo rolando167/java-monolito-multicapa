@@ -46,12 +46,12 @@ spring.jpa.properties.hibernate.format_sql=true
 - Modulo por dominio - domain-usuarios
 - Políticas de rotación de logs (diario)
 - Chaos money (delay) - Ingenieria del caos 
-- Jmeter 99% (Prueba de rendimiento)
+- Jmeter 99% (Prueba de rendimiento) - percentil 95
 - Trace ID (ID de Rastreo) HTTP
 - MDC estructurado" (Structured Logging) JSON LOGS
 - PITest - Pruebas Unitarias - se genera un reporte index
 - Colores windows terminal (adicional)
 - GlobalException 
-
+- uuid - evitar el IDOR curso/id
 
 ---

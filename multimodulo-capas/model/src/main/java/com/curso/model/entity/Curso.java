@@ -1,5 +1,7 @@
 package com.curso.model.entity;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,14 +22,18 @@ public class Curso {
 	@Column(length = 255)
 	private String descripcion;
 
+	@Column(name = "public_id", unique = true, updatable = false)
+	private UUID publicId = UUID.randomUUID(); // Se genera automáticamente al crear nuevos
+
 	// Constructor vacío obligatorio para JPA
 	public Curso() {
 	}
 
-	public Curso(Long id, String titulo, String descripcion) {
+	public Curso(Long id, String titulo, String descripcion, UUID publicId) {
 		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
+		this.publicId = publicId;
 	}
 
 	public Long getId() {
@@ -52,6 +58,14 @@ public class Curso {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public UUID getPublicId() {
+		return publicId;
+	}
+
+	public void setPublicId(UUID publicId) {
+		this.publicId = publicId;
 	}
 
 }

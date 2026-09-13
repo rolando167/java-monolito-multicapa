@@ -1,6 +1,7 @@
 package com.curso.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,13 @@ public class CursoController {
 	@GetMapping("/{id}")
 	public ResponseEntity<CursoResponseDto> buscarPorId(@PathVariable Long id) {
 		CursoResponseDto curso = cursoService.buscarPorId(id);
+		return ResponseEntity.ok(curso);
+	}
+
+	// 2. Endpoint nuevo y seguro usando el UUID público
+	@GetMapping("/v1/{publicId}")
+	public ResponseEntity<CursoResponseDto> buscarPorIdPublico(@PathVariable UUID publicId) {
+		CursoResponseDto curso = cursoService.buscarPorIdPublico(publicId);
 		return ResponseEntity.ok(curso);
 	}
 

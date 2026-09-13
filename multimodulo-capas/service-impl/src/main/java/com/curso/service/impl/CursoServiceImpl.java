@@ -1,6 +1,7 @@
 package com.curso.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -36,6 +37,15 @@ public class CursoServiceImpl implements CursoService {
 	@Transactional(readOnly = true)
 	public CursoResponseDto buscarPorId(Long id) {
 		Curso curso = cursoRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún curso con el ID: " + id));
+
+		return cursoMapper.toDto(curso); // <-- De entidad a ResponseDto en una sola línea
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public CursoResponseDto buscarPorIdPublico(UUID id) {
+		Curso curso = cursoRepository.findByPublicId(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún curso con el ID: " + id));
 
 		return cursoMapper.toDto(curso); // <-- De entidad a ResponseDto en una sola línea

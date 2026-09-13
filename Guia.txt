@@ -151,3 +151,21 @@ Cuando le toca a una petición ser "víctima", le mete un retraso aleatorio de e
  - Maximo tamaño log 10mb o config.
 
 --------------------------------------- 
+
+"Designing Data-Intensive Applications" (de Martin Kleppmann): Es considerado la biblia moderna de la ingeniería de software. Te enseña por debajo del capó cómo funcionan las bases de datos, el almacenamiento, la replicación, el particionamiento y cómo lidiar con sistemas distribuidos masivos.  Klaviyo Engineering"Release It!" (de Michael T. Nygard): Es el libro definitivo sobre resiliencia y estabilidad. Habla precisamente de patrones anti-fragilidad, cómo evitar que un fallo en cascada tire abajo todo tu sistema (circuit breakers, timeouts) y por qué ocurren los desastres en producción.  "Fundamentals of Software Architecture" (de Mark Richards y Neal Ford): Ideal para entender los trade-offs (contraprestaciones). Te enseña que en ingeniería avanzada no existen las balas de plata, sino elegir qué sacrificas (rendimiento vs. consistencia, costos vs. disponibilidad).  "Software Architecture: The Hard Parts" (de Neal Ford, Mark Richards, etc.): Va un paso más allá de los fundamentos y aborda problemas complejos de microservicios, transacciones distribuidas y la desalineación de datos. 
+
+1. "Release It! Design and Deploy Production-Ready Software" — Michael T. Nygard
+2. "Designing Data-Intensive Applications" — Martin Kleppmann
+
+---------------------------------------  UUID campo en curso publicid
+-- actualizar registros null en ese campo desde el docker
+
+docker exec -it 318b166f9b69 psql -U postgres -d cursos_db -c "UPDATE cursos SET public_id = gen_random_uuid() WHERE public_id IS NULL;"
+--------
+-- Para comprobar que se actualizó correctamente y ver los datos
+
+docker exec -it 318b166f9b69 psql -U postgres -d cursos_db
+
+Una vez dentro (cursos_db=#), escribe SELECT id, public_id, titulo FROM cursos; y presiona Enter.
+ Para salir escribe \q.
+---------------------------------------  
