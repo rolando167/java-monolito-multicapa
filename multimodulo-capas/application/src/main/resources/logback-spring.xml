@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+	<!-- Appender para la consola en formato JSON -->
+	<appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+			<!-- Incluye automáticamente MDC (como traceId y spanId de
+			Micrometer) -->
+			<includeMdcKeyName>traceId</includeMdcKeyName>
+			<includeMdcKeyName>spanId</includeMdcKeyName>
+		</encoder>
+	</appender>
+
+	<!-- Appender para guardar en archivo (logs/app.log) con rotación y formato
+	JSON -->
+	<appender name="FILE_JSON"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/app.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>logs/app-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>10MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>3GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+			<includeMdcKeyName>traceId</includeMdcKeyName>
+			<includeMdcKeyName>spanId</includeMdcKeyName>
+			<includeMdcKeyName>userId</includeMdcKeyName>
+		</encoder>
+	</appender>
+
+	<!-- Nivel general de logs -->
+	<root level="INFO">
+		<appender-ref ref="CONSOLE_JSON" />
+		<appender-ref ref="FILE_JSON" />
+	</root>
+
+</configuration>
