@@ -49,7 +49,7 @@ spring.jpa.properties.hibernate.format_sql=true
 - Jmeter 99% (Prueba de rendimiento)
 - Trace ID (ID de Rastreo) HTTP
 - MDC estructurado" (Structured Logging) JSON LOGS
-- PITest - Pruebas Unitarias 
+- PITest - Pruebas Unitarias - se genera un reporte index
 - Colores windows terminal (adicional)
 
 
