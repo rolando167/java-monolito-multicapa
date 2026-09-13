@@ -40,3 +40,18 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
+```
+---
+## 🤩 Temas Vistos
+- Modulo por dominio - domain-usuarios
+- Políticas de rotación de logs (diario)
+- Chaos money (delay) - Ingenieria del caos 
+- Jmeter 99% (Prueba de rendimiento)
+- Trace ID (ID de Rastreo) HTTP
+- MDC estructurado" (Structured Logging) JSON LOGS
+- PITest - Pruebas Unitarias 
+- Colores windows terminal (adicional)
+
+
+
+---

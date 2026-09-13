@@ -3,7 +3,11 @@ package com.curso.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.Optional;
@@ -114,5 +118,59 @@ class CursoServiceImplTest {
 				.hasMessage("Curso no encontrado con id: " + id);
 
 		verify(cursoRepository, never()).deleteById(any());
+	}
+
+	@Test
+	@DisplayName("Debería guardar un curso correctamente")
+	void guardarCurso_deberiaRetornarCursoGuardado() {
+		Curso curso = new Curso();
+		curso.setTitulo("Microservicios con Kafka");
+
+		when(cursoRepository.save(curso)).thenReturn(curso);
+
+		Curso resultado = cursoService.guardarCurso(curso);
+
+		assertThat(resultado).isNotNull();
+		assertThat(resultado.getTitulo()).isEqualTo("Microservicios con Kafka");
+		verify(cursoRepository, times(1)).save(curso);
+	}
+
+	@Test
+	@DisplayName("Debería actualizar un curso existente")
+	void actualizarCurso_cuandoExiste_deberiaActualizarlo() {
+		Long id = 1L;
+		Curso cursoExistente = new Curso();
+		cursoExistente.setId(id);
+		cursoExistente.setTitulo("Título viejo");
+		cursoExistente.setDescripcion("Desc vieja");
+
+		Curso cursoDetalles = new Curso();
+		cursoDetalles.setTitulo("Título nuevo");
+		cursoDetalles.setDescripcion("Desc nueva");
+
+		when(cursoRepository.findById(id)).thenReturn(Optional.of(cursoExistente));
+		when(cursoRepository.save(any(Curso.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+		Curso resultado = cursoService.actualizarCurso(id, cursoDetalles);
+
+		assertThat(resultado.getTitulo()).isEqualTo("Título nuevo");
+		assertThat(resultado.getDescripcion()).isEqualTo("Desc nueva");
+		verify(cursoRepository).findById(id);
+		verify(cursoRepository).save(cursoExistente);
+	}
+
+	@Test
+	@DisplayName("Debería lanzar excepción al intentar actualizar un curso que no existe")
+	void actualizarCurso_cuandoNoExiste_deberiaLanzarExcepcion() {
+		Long id = 99L;
+		Curso cursoDetalles = new Curso();
+		cursoDetalles.setTitulo("Título nuevo");
+
+		when(cursoRepository.findById(id)).thenReturn(Optional.empty());
+
+		assertThatThrownBy(() -> cursoService.actualizarCurso(id, cursoDetalles)).isInstanceOf(RuntimeException.class)
+				.hasMessage("Curso no encontrado con id: " + id);
+
+		verify(cursoRepository, never()).save(any(Curso.class));
 	}
 }

@@ -25,6 +25,10 @@ mvn spring-boot:run -pl application
 -- Test
 >mvn test -pl service-impl -Dtest=CursoServiceImplTest
 
+-- CON PITEST - 
+
+>mvn test-compile org.pitest:pitest-maven:mutationCoverage -pl service-impl
+
 ---------------------------------------
 comprobar si e puerto esta ejecutando algo 
 > netstat -ano | findstr 5432
