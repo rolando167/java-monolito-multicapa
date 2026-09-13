@@ -34,6 +34,15 @@
 			<artifactId>domain-usuarios</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>chaos-monkey-spring-boot</artifactId>
+			<!-- Asegúrate de usar una versión compatible con tu Spring Boot,
+			ej: 3.x o 2.x -->
+			<version>3.1.0</version> <!-- (O la última versión acorde a tu Spring
+			Boot) -->
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

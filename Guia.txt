@@ -130,11 +130,16 @@ prompt $e[4;5;31m[*]$e[0m $e[33m$p$g$e[0m
 prompt $e[96m$p$g$e[0m
 
 prompt $e[4;5;31m[*]$e[0m $e[96m$p$g$e[0m
+
+--------------------------------------- Chaos money
+Para apagarlo sin desinstalarlo, simplemente cambias chaos.monkey.enabled=false y reinicias la app.
+
+Como pusiste chaos.monkey.assaults.level=5, el mono está interceptando 1 de cada 5 peticiones (el 20% de las veces).
+
+Cuando le toca a una petición ser "víctima", le mete un retraso aleatorio de entre 500 ms y 2000 ms (0.5 a 2 segundos). El resto de peticiones vuelan a sus 9 ms habituales.
+
+
 ---------------------------------------
-
-
-
-
 
 
 
