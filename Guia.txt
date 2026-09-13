@@ -139,7 +139,8 @@ Como pusiste chaos.monkey.assaults.level=5, el mono está interceptando 1 de cad
 Cuando le toca a una petición ser "víctima", le mete un retraso aleatorio de entre 500 ms y 2000 ms (0.5 a 2 segundos). El resto de peticiones vuelan a sus 9 ms habituales.
 
 
----------------------------------------
+--------------------------------------- políticas de rotación de logs
+ - Fecha por dia
+ - Maximo tamaño log 10mb o config.
 
-
-
+--------------------------------------- 
