@@ -36,6 +36,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.curso</groupId>
+			<artifactId>service-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.curso</groupId>
+			<artifactId>service-impl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>chaos-monkey-spring-boot</artifactId>
 			<!-- Asegúrate de usar una versión compatible con tu Spring Boot,

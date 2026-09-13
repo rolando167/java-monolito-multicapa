@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.curso.dto.CursoResponseDto;
+import com.curso.exception.ResourceNotFoundException;
 import com.curso.mapper.CursoMapper;
 import com.curso.model.entity.Curso;
 import com.curso.repository.CursoRepository;
@@ -34,7 +35,8 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	@Transactional(readOnly = true)
 	public CursoResponseDto buscarPorId(Long id) {
-		Curso curso = cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
+		Curso curso = cursoRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Curso no encontrado" + id));
 
 		return cursoMapper.toDto(curso); // <-- De entidad a ResponseDto en una sola línea
 	}

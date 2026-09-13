@@ -1,26 +1,37 @@
 package com.curso.exception;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.URI;
+import java.time.Instant;
 
+import org.slf4j.MDC;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	// Maneja cuando no se encuentra un recurso (ej. Curso no encontrado)
-	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex) {
-		Map<String, Object> respuesta = new HashMap<>();
-		respuesta.put("timestamp", LocalDateTime.now());
-		respuesta.put("status", HttpStatus.NOT_FOUND.value());
-		respuesta.put("error", "No encontrado o error en la petición");
-		respuesta.put("message", ex.getMessage());
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ProblemDetail handleResourceNotFound(ResourceNotFoundException ex) {
 
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+
+		problemDetail.setTitle("Recurso No Encontrado");
+		problemDetail.setType(URI.create("https://api.tuempresa.com/errors/resource-not-found"));
+
+		// Propiedades personalizadas
+		problemDetail.setProperty("timestamp", Instant.now());
+		problemDetail.setProperty("error_code", "ERR_USER_404");
+
+		// Inyectamos el traceId desde el MDC (ajusta la clave según cómo lo guardes:
+		// "traceId", "correlationId", etc.)
+		String traceId = MDC.get("traceId");
+		if (traceId != null) {
+			problemDetail.setProperty("traceId", traceId);
+		}
+
+		return problemDetail; // Spring lo serializa directamente a ProblemDetail + HTTP Status
 	}
 }
