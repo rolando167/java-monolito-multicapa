@@ -2,6 +2,8 @@ package com.curso.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,8 @@ public class CursoController {
 
 	private final CursoService cursoService;
 
+	private static final Logger log = LoggerFactory.getLogger(CursoController.class);
+
 	public CursoController(CursoService cursoService) {
 		this.cursoService = cursoService;
 	}
@@ -30,6 +34,7 @@ public class CursoController {
 	@GetMapping
 	public ResponseEntity<List<CursoResponseDto>> listar() {
 		List<CursoResponseDto> cursos = cursoService.listarCursos();
+		log.info("Este es mi log de prueba con traceId");
 		return ResponseEntity.ok(cursos); // Devuelve 200 OK con la lista
 	}
 
