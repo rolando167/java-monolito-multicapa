@@ -9,6 +9,9 @@ Todo ello utilizando un stack tecnológico moderno:
 - Docker y Docker Compose para la contenerización y orquestación
 - Spring Tool Suite (STS) como entorno de desarrollo
 
+--------------------------------------- URL
+http://localhost:8080/api/cursos
+
 ---------------------------------------
 -- Compilar
 mvn clean install -DskipTests
@@ -96,3 +99,42 @@ mi-proyecto/
 │
 └── application/ (orquestador general)
 ---------------------------------------
+Colores windows terminal:
+
+prompt $e[100;93m $p $e[0m$e[36m$g$e[0m
+
+------------------------ TEXTO CELETE AZUL
+prompt $e[36m$p$g$e[0m
+
+prompt $e[4;5;31m[*]$e[0m $e[36m$p$g$e[0m
+
+------------------------ TEXTO VERDE
+prompt $e[1;92m$p$g$e[0mg
+
+prompt $e[4;5;31m[*]$e[0m $e[1;92m$p$g$e[0m
+
+--
+prompt $e[4;5;31m[*]$e[0m $e[4;32m$p$g$e[0m
+
+------------------------ TEXTO CREMA
+prompt $e[93m$p$g$e[0m
+
+prompt $e[4;5;31m[*]$e[0m $e[93m$p$g$e[0m
+
+------------------------ TEXTO MOSTAZA
+prompt $e[33m$p$g$e[0m
+
+prompt $e[4;5;31m[*]$e[0m $e[33m$p$g$e[0m
+
+------------------------ TEXTO CELESTE BRILLANTE
+prompt $e[96m$p$g$e[0m
+
+prompt $e[4;5;31m[*]$e[0m $e[96m$p$g$e[0m
+---------------------------------------
+
+
+
+
+
+
+

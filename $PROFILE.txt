@@ -1,0 +1,2 @@
+Set-PSReadLineOption -Colors @{ Command = 'Cyan'; Parameter = 'Yellow'; String = 'DarkGreen'; Error = 'Red' }
+function prompt { "PS `e[32m$PWD`e[0m> " }
