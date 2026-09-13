@@ -51,7 +51,7 @@ spring.jpa.properties.hibernate.format_sql=true
 - MDC estructurado" (Structured Logging) JSON LOGS
 - PITest - Pruebas Unitarias - se genera un reporte index
 - Colores windows terminal (adicional)
-
+- GlobalException 
 
 
 ---

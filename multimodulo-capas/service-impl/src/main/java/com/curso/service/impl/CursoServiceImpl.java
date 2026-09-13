@@ -36,7 +36,7 @@ public class CursoServiceImpl implements CursoService {
 	@Transactional(readOnly = true)
 	public CursoResponseDto buscarPorId(Long id) {
 		Curso curso = cursoRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Curso no encontrado" + id));
+				.orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún curso con el ID: " + id));
 
 		return cursoMapper.toDto(curso); // <-- De entidad a ResponseDto en una sola línea
 	}

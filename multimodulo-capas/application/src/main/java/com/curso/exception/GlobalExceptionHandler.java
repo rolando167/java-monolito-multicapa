@@ -34,4 +34,32 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 		return problemDetail; // Spring lo serializa directamente a ProblemDetail + HTTP Status
 	}
+
+	@ExceptionHandler(Exception.class)
+	public ProblemDetail handleGlobalException(Exception ex) {
+
+		// 1. Obtenemos el traceId del MDC
+		String traceId = MDC.get("traceId");
+
+		// 2. Registramos el error completo en los logs del servidor (nivel ERROR con
+		// stacktrace)
+//        log.error("Error interno no controlado [traceId: {}]: {}", traceId, ex.getMessage(), ex);
+
+		// 3. Construimos la respuesta limpia para el cliente (ocultando detalles
+		// técnicos internos)
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR,
+				"Ocurrió un error interno en el servidor. Por favor, intente más tarde.");
+
+		problemDetail.setTitle("Error Interno del Servidor");
+		problemDetail.setType(URI.create("https://api.tuempresa.com/errors/internal-server-error"));
+
+		problemDetail.setProperty("timestamp", Instant.now());
+		problemDetail.setProperty("error_code", "ERR_SYS_500");
+
+		if (traceId != null) {
+			problemDetail.setProperty("traceId", traceId);
+		}
+
+		return problemDetail;
+	}
 }
